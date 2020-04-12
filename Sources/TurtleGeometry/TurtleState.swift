@@ -12,8 +12,8 @@ struct TurtleState {
     /// The turtle's  position in x,y cartesian coordinates
     var position: Vec2D = .origin
     
-    /// The turtle's heading angle in degrees or radians
-    var direction: Angle = .zero
+    /// The turtle's heading angle in  radians to x-axis
+    var direction: Double = .pi / 2
     
     /// The turtles pen drawing mode
     var isUp: Bool =  false
