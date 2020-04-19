@@ -9,32 +9,34 @@ import Foundation
 
 
 /// An angle can be represented in degrees or radians.
-public struct Angle {
+struct Angle {
 
-    public enum Unit: String {
+    enum Unit: String {
         case degree
         case radian
     }
 
+    /// The angle value in degrees or radians
     let value: Double
-    let unit: Unit
     
+    /// The unit of the angle
+    let unit: Unit
     
     static let zero = Angle(0)
 
-    init(_ value: Double = 0, _ unit: Unit = .degree) {
+    init(_ value: Double, unit: Unit = .degree) {
         self.value = value
         self.unit = unit
     }
 
-    public var degree: Double {
+    var degree: Double  {
         switch unit {
             case .degree: return value
             case .radian: return value * (180.0 / .pi)
         }
     }
 
-    public var radian: Double {
+    var radian: Double  {
         switch unit {
             case .degree: return value * (.pi / 180.0)
             case .radian: return value

@@ -9,19 +9,14 @@ import Foundation
 
 /// The Turtle's internal state.
 struct TurtleState {
+    
     /// The turtle's  position in x,y cartesian coordinates
     var position: Vec2D = .origin
     
     /// The turtle's heading angle in  radians to x-axis
-    var direction: Double = .pi / 2
+    var heading: Vec2D = Vec2D(0,1)
     
-    /// The turtles pen drawing mode
-    var isUp: Bool =  false
-    
-    /// The turtles pen color
-    var penColor: Color = ColorPalette.black.color
-    
-    /// The turtles pen strength in points
-    var penStrength: Int = 1
+    /// The turtl's pen
+    var pen: Pen = Pen()
     
 }
