@@ -10,13 +10,13 @@ import XCTest
 final class AngleTests: XCTestCase {
     
     func testInitializerDegree() {
-        let value = Double.random(in: 0...360)
+        let value = Double.random(in: 5...360)
         let angle = Angle(value)
         
         XCTAssertTrue(angle.value == value)
         XCTAssertTrue(angle.unit == .degree)
         XCTAssertTrue(angle.degree == value)
-        XCTAssertTrue(angle.radian == (value / 180 * .pi))
+        XCTAssertTrue(angle.radian == value * (.pi / 180) )
     }
     
     func testInitializerRadian() {

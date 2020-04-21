@@ -13,7 +13,7 @@ struct Pen {
     var isUp = true
     
     /// The  pen color
-    var color = ColorPalette.black
+    var color: Color = ColorPalette.white.color
     
     /// The pen strength in points
     var width = 1

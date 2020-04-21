@@ -17,8 +17,8 @@ final class ColorPaletteTests: XCTestCase {
     }
     
     func testSomeColors() {
-        let red = Color("F44336")
-        let lime = Color("CDDC39")
+        let red = Color(hex: "F44336")
+        let lime = Color(hex: "CDDC39")
 
         XCTAssertTrue(red == ColorPalette.red.color)
         XCTAssertTrue(lime == ColorPalette.lime.color)

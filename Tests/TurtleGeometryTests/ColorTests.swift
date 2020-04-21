@@ -10,27 +10,27 @@ import XCTest
 final class ColorTests: XCTestCase {
     
     func testValidHexStringInitializer() {
-        let red = Color("FF0000", name: "red")
-        let green = Color("00FF00", name: "green")
-        let blue = Color("0x0000FF", name: "blue")
-        let white = Color("0xFFFFFF", name: "white")
+        let red = Color(hex: "FF0000", name: "red")
+        let green = Color(hex: "00FF00", name: "green")
+        let blue = Color(hex: "0x0000FF", name: "blue")
+        let white = Color(hex: "0xFFFFFF", name: "white")
     
         assertColors(red: red, green: green, blue: blue, white: white)
         
     }
     
     func testInvalidHexColorInitializer() {
-        XCTAssertNil(Color("0XFFFFFF"))
-        XCTAssertNil(Color("0xFF"))
-        XCTAssertNil(Color("0xFF0000FF"))
-        XCTAssertNil(Color("FFF0000"))
+        XCTAssertNil(Color(hex: "0XFFFFFF"))
+        XCTAssertNil(Color(hex: "0xFF"))
+        XCTAssertNil(Color(hex: "0xFF0000FF"))
+        XCTAssertNil(Color(hex: "FFF0000"))
     }
     
     func testValidRGBInitailizer() {
-        let red = Color(255, 0, 0, name: "red")
-        let green = Color(0, 255, 0, name: "green")
-        let blue = Color(0, 0, 255, name: "blue")
-        let white = Color(255, 255, 255, name: "white")
+        let red = Color(red:255, green:0, blue:0, name: "red")
+        let green = Color(red:0, green:255, blue:0, name: "green")
+        let blue = Color(red:0, green:0, blue:255, name: "blue")
+        let white = Color(red:255, green:255, blue:255, name: "white")
         
         assertColors(red: red, green: green, blue: blue, white: white)
     }

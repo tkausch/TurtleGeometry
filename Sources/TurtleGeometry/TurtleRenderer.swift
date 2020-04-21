@@ -11,13 +11,18 @@ import Foundation
 import UIKit
 
 
-class TurtleRenderer: TurtleDelegate {
+public class TurtleRenderer {
     
     private var turtle: Turtle?
     private var canvas: Canvas?
+    
     private var cgContext: CGContext!
     
-    func image(turtle: Turtle, canvas: Canvas, actions: (Turtle) -> Void) -> UIImage {
+    public init() {
+        // do nothing
+    }
+    
+    public  func image(turtle: Turtle, canvas: Canvas, actions: (Turtle) -> Void) -> UIImage {
         let renderer = UIGraphicsImageRenderer(size: CGSize(width: canvas.size.x, height: canvas.size.y))
         
         self.turtle = turtle
@@ -32,6 +37,11 @@ class TurtleRenderer: TurtleDelegate {
         
     }
     
+}
+
+
+extension TurtleRenderer : TurtleDelegate {
+    
     // MARK: - TurtleDelegate methods
     
     func turtle(_ turtle: Turtle, move aPoint: Vec2D) {
@@ -40,29 +50,28 @@ class TurtleRenderer: TurtleDelegate {
     
     func turtle(_ turtle: Turtle, drawLineFrom from: Vec2D, to: Vec2D) {
         cgContext.beginPath()
-        cgContext.setStrokeColor(turtle.state.pen.color.color.cgColor)
         cgContext.move(to: CGPoint(x: from.x, y: from.y))
         cgContext.addLine(to: CGPoint(x: to.x, y: to.y))
-        cgContext.strokePath();
+        cgContext.drawPath(using: .stroke)
     }
     
     func turtle(_ turtle: Turtle, didChangePenIsUp: Bool) {
         // do nothing
     }
     
-    func turtle(_ turtle: Turtle, didChangePenColor: ColorPalette) {
-        // do nothing
+    func turtle(_ turtle: Turtle, didChangePenColor: Color) {
+        cgContext.setStrokeColor(turtle.state.pen.color.cgColor)
     }
     
     func turtle(_ turtle: Turtle, didChangePenWidth: Int) {
-        // do nothing
+        cgContext.setLineWidth(CGFloat(turtle.state.pen.width))
     }
     
     func turtle(_ turtle: Turtle, didChangeHeading: Vec2D) {
         // do nothing
     }
-    
 }
+
 
 extension Color {
     

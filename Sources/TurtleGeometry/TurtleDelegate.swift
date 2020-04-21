@@ -8,7 +8,7 @@
 import Foundation
 
 
-public protocol TurtleDelegate {
+protocol TurtleDelegate {
     
     func turtle(_ turtle: Turtle, move: Vec2D)
 
@@ -16,11 +16,10 @@ public protocol TurtleDelegate {
     
     func turtle(_ turtle: Turtle, didChangePenIsUp: Bool)
     
-    func turtle(_ turtle: Turtle, didChangePenColor: ColorPalette)
+    func turtle(_ turtle: Turtle, didChangePenColor: Color)
     
     func turtle(_ turtle: Turtle, didChangePenWidth: Int)
 
     func turtle(_ turtle: Turtle, didChangeHeading: Vec2D)
-    
     
 }

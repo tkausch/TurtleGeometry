@@ -51,7 +51,7 @@ public class Turtle {
     /// Set turtles pen color
     /// - Parameter color: the pen color
     @discardableResult
-    public  func setPenColor(_ color: ColorPalette) -> Self {
+    public  func setPenColor(_ color: Color) -> Self {
         state.pen.color = color
         delegate?.turtle(self, didChangePenColor: color)
         return self
@@ -91,15 +91,23 @@ public class Turtle {
     /// - Returns: the turtle after operation has finished
     @discardableResult
     public func move(_ distance: Double) -> Self {
-         let previousPosition = state.position
-         state.position = previousPosition + distance * state.heading
-               if state.pen.isUp {
-                   delegate?.turtle(self, move: state.position)
-               } else {
-                   delegate?.turtle(self, drawLineFrom: previousPosition, to: state.position)
-               }
+        let previousPosition = state.position
+        state.position = previousPosition + distance * state.heading
+        if state.pen.isUp {
+            delegate?.turtle(self, move: state.position)
+        } else {
+            delegate?.turtle(self, drawLineFrom: previousPosition, to: state.position)
+        }
         return self
     }
+
+    @discardableResult
+    public func goto(_ x: Double, _ y: Double) -> Self {
+        state.position = Vec2D(x,y)
+        delegate?.turtle(self, move: state.position)
+        return self
+    }
+    
     
     /// Change the direction that the turtle faces by an amount equal to the argument  in clock direction.
     /// - Parameter radians: the angle in degrees  clockwise in current direction.
@@ -112,7 +120,6 @@ public class Turtle {
         delegate?.turtle(self, didChangeHeading: state.heading)
         return self
     }
-    
     
     /// Change the turtle heading in clockwise direction in whcih the turtle is facing.
     /// - Parameter angle: the angle in degrees to change heading
@@ -133,5 +140,21 @@ public class Turtle {
         delegate?.turtle(self, didChangeHeading: state.heading)
         return self
     }
+    
+    /// Randomly move the turtle by turning and moving ahead.
+    @discardableResult
+    public func randomMove(_ distance: Double) -> Self {
+        turn(Double.random(in: 0...360))
+        move(Double.random(in: 0...distance))
+        return self
+    }
+    
+    /// Turtle selects a random color.
+    @discardableResult
+    public func randomColor() -> Self {
+        setPenColor(Color.random())
+        return self
+    }
+    
     
 }

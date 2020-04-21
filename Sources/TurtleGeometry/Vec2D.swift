@@ -15,6 +15,10 @@ public struct Vec2D: Equatable {
 
     static let origin = Vec2D()
     
+    public init(_ x: Int, _ y: Int) {
+        self.init(Double(x), Double(y))
+    }
+    
     public init(_ x: Double = 0, _ y: Double = 0) {
         self.x = x
         self.y = y
@@ -26,26 +30,26 @@ public struct Vec2D: Equatable {
     
 }
 
-func + (lhs: Vec2D, rhs: Vec2D) -> Vec2D {
+public func + (lhs: Vec2D, rhs: Vec2D) -> Vec2D {
     return Vec2D(lhs.x + rhs.x, lhs.y + rhs.y)
 }
 
-func - (lhs: Vec2D, rhs: Vec2D) -> Vec2D {
+public func - (lhs: Vec2D, rhs: Vec2D) -> Vec2D {
     return Vec2D(lhs.x - rhs.x, lhs.y - rhs.y)
 }
 
-func * (lhs: Vec2D, rhs: Vec2D) -> Double {
+public func * (lhs: Vec2D, rhs: Vec2D) -> Double {
     return lhs.x * rhs.x + lhs.y * rhs.y
 }
 
-func * (lhs: Double, rhs: Vec2D) -> Vec2D {
+public func * (lhs: Double, rhs: Vec2D) -> Vec2D {
     return Vec2D(lhs * rhs.x, lhs * rhs.y)
 }
 
-func * (lhs: Vec2D, rhs: Double) -> Vec2D {
+public func * (lhs: Vec2D, rhs: Double) -> Vec2D {
     return Vec2D(lhs.x * rhs, lhs.y * rhs)
 }
 
-func abs(_ vec: Vec2D) -> Double {
+public func abs(_ vec: Vec2D) -> Double {
     return (vec.x * vec.x + vec.y * vec.y).squareRoot()
 }

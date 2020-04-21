@@ -7,12 +7,15 @@
 
 import Foundation
 
-public protocol Canvas: TurtleDelegate {
+public struct Canvas {
 
-    func add(turtle: Turtle)
-    
-    var size: Vec2D { get }
-    
-    var color: ColorPalette { get }
+    let size: Vec2D
+    let color: ColorPalette
 
+    public init(width: Double, height: Double, color: ColorPalette = .black) {
+        self.size = Vec2D(width,height)
+        self.color = color
+    }
+    
+    
 }

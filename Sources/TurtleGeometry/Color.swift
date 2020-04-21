@@ -8,22 +8,23 @@
 import Foundation
 
 /// Internal representation of colors
-struct Color: CustomStringConvertible, Equatable {
+public struct Color: CustomStringConvertible, Equatable {
 
-    let r: UInt8
-    let g: UInt8
-    let b: UInt8
+    public let r: UInt8
+    public let g: UInt8
+    public let b: UInt8
 
-    let name: String
+    public let name: String
 
-    init(_ red: UInt8, _ green: UInt8, _ blue: UInt8, name: String) {
+    
+    public init(red: UInt8, green: UInt8, blue: UInt8, name: String) {
         self.r = red
         self.g = green
         self.b = blue
         self.name = name
     }
 
-    init?(_ hex: String, name: String? = nil) {
+    public init?(hex: String, name: String? = nil) {
         
         guard (hex.hasPrefix("0x") && hex.count == 8) || hex.count == 6 else {
             return nil
@@ -36,12 +37,19 @@ struct Color: CustomStringConvertible, Equatable {
             let red = UInt8((color & 0xFF0000) >> 16)
             let green = UInt8((color & 0x00FF00) >> 8)
             let blue = UInt8((color & 0x0000FF) >> 0)
-            self.init(red, green, blue, name: name ?? hex)
+            self.init(red: red, green: green,blue: blue, name: name ?? hex)
         } else {
             return nil
         }
         
     }
+    
+    
+    // MARK: - Random
+    public static func random() -> Color {
+        return Color(red: UInt8.random(in: 0...255), green: UInt8.random(in: 0...255), blue: UInt8.random(in: 0...255)  , name: "random Color")
+    }
+    
 
     // MARK: - CustomStringConvertible
 
@@ -51,7 +59,7 @@ struct Color: CustomStringConvertible, Equatable {
     }
 
     // MARL: - Equatable
-    
+
     
     /// Returns true if two colors are equal. 
     public static func == (lhs: Self, rhs: Self) -> Bool {
