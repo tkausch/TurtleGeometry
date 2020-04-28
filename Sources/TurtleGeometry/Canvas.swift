@@ -12,10 +12,9 @@ public struct Canvas {
     let size: Vec2D
     let color: ColorPalette
 
-    public init(width: Double, height: Double, color: ColorPalette = .black) {
-        self.size = Vec2D(width,height)
+    public init(size: Vec2D, color: ColorPalette = .black) {
+        self.size = size
         self.color = color
     }
-    
     
 }

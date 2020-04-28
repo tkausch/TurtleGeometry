@@ -34,8 +34,8 @@ public class Turtle {
     /// - Returns: the turtle ater operation is executed
     @discardableResult
     public func penUp() -> Self {
-        state.pen.isUp = true
-        delegate?.turtle(self, didChangePenIsUp: true)
+        state.pen.isDown = false
+        delegate?.turtle(self, didPenDown: false)
         return self
     }
     
@@ -43,15 +43,15 @@ public class Turtle {
     /// - Returns: the turtle after operation has finished.
     @discardableResult
     public func penDown() -> Self {
-        state.pen.isUp = false
-        delegate?.turtle(self, didChangePenIsUp: false)
+        state.pen.isDown = true
+        delegate?.turtle(self, didPenDown: true)
         return self
     }
     
     /// Set turtles pen color
     /// - Parameter color: the pen color
     @discardableResult
-    public  func setPenColor(_ color: Color) -> Self {
+    public  func penColor(_ color: Color) -> Self {
         state.pen.color = color
         delegate?.turtle(self, didChangePenColor: color)
         return self
@@ -60,7 +60,7 @@ public class Turtle {
     /// Set turtles pen line width
     /// - Parameter width: pen width
     @discardableResult
-    public func setPenWidth(_ width: Int) -> Self {
+    public func penWidth(_ width: Int) -> Self {
         state.pen.width = width
         delegate?.turtle(self, didChangePenWidth: width)
         return self
@@ -73,7 +73,9 @@ public class Turtle {
     /// - Returns: the turtle after opteration is executed
     @discardableResult
     public func forward(_ distance: Double) -> Self {
-        return move(distance)
+        state.position = state.position + state.heading * distance
+        delegate?.turtle(self, didForward: distance)
+        return self
     }
     
     /// Move turtle in its oposit direction a number of bits. If the turtles status is down a line will be drawn.
@@ -81,33 +83,23 @@ public class Turtle {
     /// - Returns: the turtle after opteration is executed
     @discardableResult
     public func backward(_ distance: Double) -> Self {
-        return forward(-distance)
-    }
-    
-    /// Move the turtle to position `aPoint`. If the receiver status is `down`, a line will be drawn from current position.
-    /// The turtle direction does not change.
-    /// - Parameter x: aPoint's x coordinate
-    /// - Parameter y: aPoint's y coordinate
-    /// - Returns: the turtle after operation has finished
-    @discardableResult
-    public func move(_ distance: Double) -> Self {
-        let previousPosition = state.position
-        state.position = previousPosition + distance * state.heading
-        if state.pen.isUp {
-            delegate?.turtle(self, move: state.position)
-        } else {
-            delegate?.turtle(self, drawLineFrom: previousPosition, to: state.position)
-        }
+        state.position = state.position + state.heading * -distance
+        delegate?.turtle(self, didBackward: distance)
         return self
     }
+    
 
     @discardableResult
     public func goto(_ x: Double, _ y: Double) -> Self {
         state.position = Vec2D(x,y)
-        delegate?.turtle(self, move: state.position)
+        delegate?.turtle(self, didGoto: state.position)
         return self
     }
     
+    
+    fileprivate func newHeading(_ heading: Vec2D, _ alpha: Double) -> Vec2D {
+        return Vec2D( heading.x * cos(alpha) - heading.y * sin(alpha) , heading.x * sin(alpha) + heading.y * cos(alpha) )
+    }
     
     /// Change the direction that the turtle faces by an amount equal to the argument  in clock direction.
     /// - Parameter radians: the angle in degrees  clockwise in current direction.
@@ -115,9 +107,7 @@ public class Turtle {
     @discardableResult
     public func turn(_ angle: Double) -> Self {
         let alpha = Angle(angle,unit: .degree).radian
-        let heading = state.heading
-        state.heading = Vec2D( heading.x * cos(alpha) - heading.y * sin(alpha) , heading.x * sin(alpha) + heading.y * cos(alpha) )
-        delegate?.turtle(self, didChangeHeading: state.heading)
+        state.heading = newHeading(state.heading, alpha)
         return self
     }
     
@@ -127,7 +117,7 @@ public class Turtle {
     @discardableResult
     public func right(_ angle: Double) -> Self {
         turn(angle)
-        delegate?.turtle(self, didChangeHeading: state.heading)
+        delegate?.turtle(self, didTurnRight: angle)
         return self
     }
     
@@ -137,24 +127,62 @@ public class Turtle {
     @discardableResult
     public func left(_ angle: Double) -> Self {
         turn(-angle)
-        delegate?.turtle(self, didChangeHeading: state.heading)
+        delegate?.turtle(self, didTurnLeft: angle)
         return self
     }
     
-    /// Randomly move the turtle by turning and moving ahead.
+    // MARK: - Random functions
+    
     @discardableResult
-    public func randomMove(_ distance: Double) -> Self {
-        turn(Double.random(in: 0...360))
-        move(Double.random(in: 0...distance))
+    public func rightRND(_ maxAngle: Double) -> Self {
+        let alpha = Double.random(in: 0...maxAngle)
+        turn(alpha)
+        delegate?.turtle(self, didTurnRightRND: alpha)
         return self
     }
+
+    @discardableResult
+    public func leftRND(_ maxAngle: Double) -> Self {
+        let alpha = Double.random(in: 0...maxAngle)
+        turn(-alpha)
+        delegate?.turtle(self, didTurnLeftRND: alpha)
+        return self
+    }
+    
+    /// Move turtle in its current direction a number of bits. If the turtles status is down a line will be drawn.
+     /// - Parameter maxDistance: the number of bits to move
+     /// - Returns: the turtle after opteration is executed
+     @discardableResult
+     public func forwardRND(_ maxDistance: Double) -> Self {
+         let distance = Double.random(in: 0...maxDistance)
+         state.position = state.position + state.heading * distance
+         delegate?.turtle(self, didForwardRND: distance)
+         return self
+     }
+     
+     /// Move turtle in its oposit direction a number of bits. If the turtles status is down a line will be drawn.
+     /// - Parameter distance: the number of bits to move
+     /// - Returns: the turtle after opteration is executed
+     @discardableResult
+     public func backwardRND(_ maxDistance: Double) -> Self {
+         let distance = Double.random(in: 0...maxDistance)
+         state.position = state.position + state.heading * -distance
+         delegate?.turtle(self, didBackwardRND: distance)
+         return self
+     }
+    
     
     /// Turtle selects a random color.
     @discardableResult
     public func randomColor() -> Self {
-        setPenColor(Color.random())
+        penColor(Color.random())
         return self
     }
     
-    
+    /// Turtle selects a random pren wifth
+    @discardableResult
+    public func randomPenWidth(_ maxWidth: Int = 20) -> Self {
+        penWidth(Int.random(in: 1...maxWidth))
+        return self
+    }
 }

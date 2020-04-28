@@ -55,7 +55,7 @@ public struct Color: CustomStringConvertible, Equatable {
 
     /// The color description in fomat:  `color-name: (red, green, blue)`
     public var description: String {
-        return "\(name): (\(r),\(g),\(b))"
+        return "\(name)(\(r),\(g),\(b))"
     }
 
     // MARL: - Equatable

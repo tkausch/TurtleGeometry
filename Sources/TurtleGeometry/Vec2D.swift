@@ -8,11 +8,15 @@
 import Foundation
 
 /// Two dimensional Vector
-public struct Vec2D: Equatable {
-    
+public struct Vec2D: Equatable, CustomStringConvertible {
+        
     public let x: Double
     public let y: Double
 
+    public var description: String {
+        return "(\(x),\(y))"
+    }
+    
     static let origin = Vec2D()
     
     public init(_ x: Int, _ y: Int) {
@@ -52,4 +56,8 @@ public func * (lhs: Vec2D, rhs: Double) -> Vec2D {
 
 public func abs(_ vec: Vec2D) -> Double {
     return (vec.x * vec.x + vec.y * vec.y).squareRoot()
+}
+
+public func angle(_ vec: Vec2D) -> Double {
+    return asin(vec.y / abs(vec))
 }

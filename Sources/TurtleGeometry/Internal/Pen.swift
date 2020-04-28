@@ -10,10 +10,10 @@ import Foundation
 struct Pen {
     
     /// The  pen drawing mode
-    var isUp = true
+    var isDown = true
     
     /// The  pen color
-    var color: Color = ColorPalette.white.color
+    var color: Color = ColorPalette.green.color
     
     /// The pen strength in points
     var width = 1
