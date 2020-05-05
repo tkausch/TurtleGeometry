@@ -42,6 +42,7 @@ public class TurtleRunner {
         let renderer = UIGraphicsImageRenderer(size: canvas.cgSize)
         let image = renderer.image { (context) in
             self.cgContext = context.cgContext
+            print("\n🐢 START DRAWING")
             actions(turtle)
         }
         return image
