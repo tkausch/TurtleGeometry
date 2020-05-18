@@ -1,4 +1,4 @@
-<img src="./Docs/images/Logo.png" />
+<img src="https://github.com/tkausch/TurtleGeometry/blob/master/Docs/images/Logo.png" />
 
 [![Swift](https://img.shields.io/badge/Swift-5.1-blue.svg)](https://swift.org)
 [![Xcode](https://img.shields.io/badge/Xcode-11.1-blue.svg)]()
@@ -38,7 +38,7 @@ let image = TurtleRunner().run() { 🐢 in
 
 ### Result
 
-<img src="./Docs/images/Sample.png" width="300" />
+<img src="https://github.com/tkausch/TurtleGeometry/blob/master/Docs/images/Sample.png" width="300" />
 
 
 ## Use in Playgrounds
