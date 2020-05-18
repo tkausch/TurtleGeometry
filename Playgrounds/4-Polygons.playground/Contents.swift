@@ -14,7 +14,7 @@ let polygon = TurtleRunner().run { 🐢 in
     🐢.goto(600, 400)
     🐢.polygon(side: 200, angle: 60)
 }
-let polygon = TurtleRunner().run { 🐢 in
+let polygon2 = TurtleRunner().run { 🐢 in
     🐢.polygon(side: 200, angle: 60)
 }
 
