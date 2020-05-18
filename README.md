@@ -1,8 +1,10 @@
 <img src="https://github.com/tkausch/TurtleGeometry/blob/master/Docs/images/Logo.png" />
 
-[![Swift](https://img.shields.io/badge/Swift-5.1-blue.svg)](https://swift.org)
-[![Xcode](https://img.shields.io/badge/Xcode-11.1-blue.svg)]()
+[![Swift](https://img.shields.io/badge/Swift-5.2-blue.svg)](https://swift.org)
+[![Xcode](https://img.shields.io/badge/Xcode-11.4-blue.svg)]()
 [![Swift Playgrounds](https://img.shields.io/badge/Swift_Playgrounds-available-blue.svg)](https://swift.org)
+![License](https://img.shields.io/badge/license-GPL-blue)
+
 
 This Swift framework makes it surprisingly easy to start creating amazing shapes using a turtle. It is a  [turtle graphics](https://en.wikipedia.org/wiki/Turtle_graphics)  engine written in Swift.
 
@@ -62,3 +64,13 @@ To add a package dependency to your Xcode project, select ``File > Swift Package
 * iOS 13.0 or later
 
 
+## Remaining Work
+
+* carthage support 
+* cocoa  pods support
+* ipad playground support
+
+
+## License
+
+Turtle Geometry is released under the GPL-3.0 license. See LICENSE for details.
