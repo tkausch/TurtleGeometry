@@ -45,7 +45,7 @@ let image = TurtleRunner().run() { 🐢 in
 
 ## Use in Playgrounds
 
-### On Xcode
+## Open  Project in Xcode
 
 1. Open `TurtleGeometry.xcworkspace` in Xcode.
 1. Build `TurtleGeometry-Package` scheme for iOS Simulator.
@@ -54,7 +54,7 @@ let image = TurtleRunner().run() { 🐢 in
 2. Discover more samples in [Turtle Geometry](https://direct.mit.edu/books/book/4663/Turtle-GeometryThe-Computer-as-a-Medium-for) Book
 
 
-## Using with Swift-Package-Manager
+## Integrate Library with Swift-Package-Manager
 
 To add a package dependency to your Xcode project, select ``File > Swift Packages > Add Package Dependency`` and enter this repository URL: `https://github.com/tkausch/TurtleGeometry` 
 
