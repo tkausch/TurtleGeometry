@@ -1,4 +1,4 @@
-name: Building for Pushes/PRs on master
+name: Building master
 
 on:
   push:
