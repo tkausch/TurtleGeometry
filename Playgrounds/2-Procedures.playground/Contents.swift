@@ -1,6 +1,4 @@
 //: A UIKit based Playground for presenting user interface
-  
-import UIKit
 import TurtleGeometry
 
 
@@ -27,7 +25,7 @@ let doodle1 = TurtleRunner().run() { 🐢 in
 //: Another approach to create new designs is rotating a simple doodle.
 let doodle2 = TurtleRunner().run() { 🐢 in
     🐢.penColor(ColorPalette.red.color)
-    for _ in 1...100 {
+    for _ in 1...9 {
         🐢.doodle()
         🐢.right(10)
         🐢.forward(50)

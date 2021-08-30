@@ -1,4 +1,3 @@
-import UIKit
 import TurtleGeometry
 //: # Polygons
 //: Here is one of the simples figures to draw: Go `FORWARD` some fixed amount, turn `RIGHT` some fixed amount, and repeat this sequence over and over. This procedure is called `POLY`.

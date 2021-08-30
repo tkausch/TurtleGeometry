@@ -1,4 +1,3 @@
-import UIKit
 import TurtleGeometry
 //: # Circles
 //: After all these straight line drawings, it is natural to ask weather the turtle can also draw curves - circles, for example. One easy way to do this is to make the turtle go `FORWARD` a little bit and then turn `RIGHT` a little bit, and repeat this over and over. When we will study the mathematics of turtle geometry, we'll see that the turtle circle closes precisely when the turtle has turned through 360 Degree. So if we generate the circle in chunks of `FORWARD 1`, `RIGHT 1`, the circle will close after precisely 360 chunks:
@@ -10,16 +9,18 @@ let circle = TurtleRunner().run() { 🐢 in
 }
 //: If we repeat the basic chunk fewer than 360 times, we get circulare arcs. For instance, 180 repetitions give a semicircle, and 60 repetitions give a 60 Degree arc. The following procedure draw left and right arcs of `DEG` degrees on a circle of size R.
 extension Turtle {
-    func arcright(_ size: Double, _ angle: Double) -> Self {
+    func arcright(_ radius: Double, _ angle: Double) -> Self {
+        let step = (radius * 2 * .pi) / angle
         for _ in 1...Int(angle) {
-            forward(size)
+            forward(step)
             right(1)
         }
         return self
     }
-    func arcleft(_ size: Double, _ angle: Double) -> Self {
+    func arcleft(_ radius: Double, _ angle: Double) -> Self {
+        let step = (radius * 2 * .pi) / angle
         for _ in 1...Int(angle) {
-            forward(size)
+            forward(step)
             left(1)
         }
         return self
@@ -29,7 +30,7 @@ extension Turtle {
 let circles = TurtleRunner().run() { 🐢 in
     🐢.penColor(ColorPalette.lightBlue.color)
     for _ in 1...9 {
-        🐢.arcright(2, 360)
+        🐢.arcright(100, 360)
         🐢.right(40)
     }
 }
@@ -45,7 +46,7 @@ extension Turtle {
 }
 let flower = TurtleRunner().run() { 🐢 in
     for _ in 1...6 {
-        🐢.petal(3)
+        🐢.petal(40)
         🐢.right(60)
     }
 }
@@ -63,7 +64,7 @@ let sun = TurtleRunner().run() { 🐢 in
     🐢.goto(600, 200)
     🐢.penColor(ColorPalette.yellow.color)
     for _ in 1...9 {
-        🐢.ray(2)
+        🐢.ray(30)
         🐢.right(160)
     }
 }
