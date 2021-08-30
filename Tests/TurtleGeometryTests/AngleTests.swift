@@ -26,7 +26,7 @@ final class AngleTests: XCTestCase {
         XCTAssertTrue(angle.value == value)
         XCTAssertTrue(angle.unit == .radian)
         XCTAssertTrue(angle.radian == value)
-        XCTAssertTrue(angle.degree ==  (value / .pi * 180))
+        XCTAssertTrue((angle.degree -  (value / .pi * 180)) < Double.ulpOfOne )
     }
     
 }
